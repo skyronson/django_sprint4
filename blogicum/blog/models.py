@@ -26,6 +26,7 @@ class PublishedModel(models.Model):
 
 
 class Category(PublishedModel):
+    """Модель категорий публикаций"""
     title = models.CharField(
         max_length=256,
         verbose_name='Заголовок',
@@ -49,6 +50,7 @@ class Category(PublishedModel):
 
 
 class Location(PublishedModel):
+    """Модель для хранения информации о местоположении публикаций"""
     name = models.CharField(
         max_length=256,
         verbose_name='Название места'
@@ -63,6 +65,8 @@ class Location(PublishedModel):
     
 
 class Post(PublishedModel):
+    """Модель хранящая все данные из публикации (название, текст, 
+    автора, место, категорию и прикрепленную картинку если есть)"""
     title = models.CharField(
         max_length=256,
         verbose_name='Заголовок',
@@ -112,6 +116,7 @@ class Post(PublishedModel):
 
 
 class Comment(PublishedModel):
+    """Модель для комментариев к публикации"""
     text = models.TextField('Комментарий')
     post = models.ForeignKey(
         Post,

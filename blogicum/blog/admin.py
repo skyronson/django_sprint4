@@ -7,23 +7,18 @@ TEXT = 'Описание публикации.'
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'text',
-        'is_published',
-        'category',
-        'location',
-        'created_at',
-        'image',
-    )
-    list_editable = (
-        'is_published',
-        'category',
-        'location',
-    )
-    search_fields = ('title',)
-    list_filter = ('category',)
-    list_display_links = ('title',)
+    list_display = ('title', 'text', 'is_published', 'category',
+                    'location', 'created_at', 'image') # Отображаемые поля
+    
+    list_editable = ('is_published', 'category', 
+                     'location') # Поля, которые можно "быстро" изменить
+    
+    search_fields = ('title',) # Поля для поиска публикации
+
+    list_filter = ('category',) # Фильтр по категории
+
+    list_display_links = ('title',) # Поле с ссылкой
+
     fieldsets = (
         ('Блок-1', {
             'fields': ('title', 'author', 'is_published',),
@@ -33,7 +28,7 @@ class PostAdmin(admin.ModelAdmin):
             'classes': ('wide', 'extrapretty'),
             'fields': ('text', 'category', 'location', 'pub_date', 'image',),
         }),
-    )
+    ) # Блоки для группировки полей
 
 
 class PostInline(admin.TabularInline):
@@ -43,6 +38,7 @@ class PostInline(admin.TabularInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    """Класс """
     inlines = (
         PostInline,
     )
