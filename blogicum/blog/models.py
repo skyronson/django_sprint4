@@ -1,12 +1,28 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from core.models import PublishedModel
-
 User = get_user_model()
 
 SYMBOL_CONSTRAINT = 30
 LIMIT_FOR_COMMENT_TITLE = 20
+
+
+class PublishedModel(models.Model):
+    """Абстрактная модель. Добвляет флаги is_published, created_at."""
+
+    is_published = models.BooleanField(
+        default=True,
+        verbose_name='Опубликовано',
+        help_text='Снимите галочку, чтобы скрыть публикацию.'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Добавлено'
+    )
+
+    class Meta:
+        abstract = True
+        ordering = ('-order_date',)
 
 
 class Category(PublishedModel):
